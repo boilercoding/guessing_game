@@ -11,7 +11,11 @@ defmodule GuessingGameUI do
           :ok ->
             IO.inspect "You are the winner!"
             user_input = IO.gets "Want to play again: y/n "
-            if String.strip(user_input) == "y", do: game(:rand.uniform(10))
+            strip_input = String.strip(user_input)
+            case strip_input do
+              "y" -> game(:rand.uniform(10))
+              "n" -> IO.puts "\n\n*************   Good Bye! Thanks for playing.   *************\n\n"
+            end
 
           :error ->
             IO.inspect compare_message
